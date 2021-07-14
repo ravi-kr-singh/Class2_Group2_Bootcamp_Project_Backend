@@ -249,6 +249,7 @@ def hello_world():
 
 
 def visa_token_service(card_number): #Mocking visa token service
+    #API was restricted that's why returning this dummy token.
     return "837048nufgjks458jkgjf8i4njkkfljg87kjg256"
 
 @app.route('/register',methods=['POST'])
@@ -287,6 +288,13 @@ def login():
     else:
         return jsonify(message='Invalid credentials!'), 401
 
+
+
+@app.route('/trans_history',methods=['GET'])
+def trans_history():
+    transactions_list = Transaction.query.all()
+    result = transactions_schema.dump(transactions_list)
+    return jsonify(result)
 
 #database models
 class User(db.Model):
