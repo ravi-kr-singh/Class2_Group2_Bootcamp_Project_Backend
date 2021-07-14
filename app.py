@@ -296,6 +296,12 @@ def trans_history():
     result = transactions_schema.dump(transactions_list)
     return jsonify(result)
 
+@app.route('/merchant_search',methods=['GET'])
+def merchant_search():
+    merchants_list = Merchant.query.all()
+    result = merchants_schema.dump(merchants_list)
+    return jsonify(result)
+
 #database models
 class User(db.Model):
     __tablename__ = 'users'
